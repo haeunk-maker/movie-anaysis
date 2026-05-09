@@ -49,7 +49,12 @@ with col2:
 # --- 차트 2: 정책 전 vs 후 평균 관객수 ---
 st.header("2. 정책 시행 전/후 평균 관객수 비교")
 sql2 = """
-SELECT 정책여부, AVG(전체관객수) as 평균관객수 
+SELECT 
+  CASE 
+    WHEN 날짜 >= '2025-07-25' THEN '정책후'
+    ELSE '정책전'
+  END AS 정책여부,
+  AVG(전체관객수) as 평균관객수 
 FROM daily_stats 
 GROUP BY 정책여부
 """
@@ -75,7 +80,13 @@ with col4:
 # --- 차트 3: 한국 vs 외국 관객수 비교 ---
 st.header("3. 한국 vs 외국 관객수 비교 (정책 기준)")
 sql3 = """
-SELECT 정책여부, AVG(한국관객수) as 한국인평균, AVG(외국관객수) as 외국인평균 
+SELECT 
+  CASE 
+    WHEN 날짜 >= '2025-07-25' THEN '정책후'
+    ELSE '정책전'
+  END AS 정책여부,
+  AVG(한국관객수) as 한국인평균, 
+  AVG(외국관객수) as 외국인평균 
 FROM daily_stats 
 GROUP BY 정책여부
 """
