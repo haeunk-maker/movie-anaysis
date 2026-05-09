@@ -28,9 +28,13 @@ st.divider()
 # --- 차트 1: 주별 관객수 변화 ---
 st.header("1. 주별 관객수 변화 추이")
 sql1 = """
-SELECT strftime('%Y-%W', 날짜) as 주차, SUM(전체관객수) as 총관객수 
-FROM daily_stats 
-GROUP BY 주차 
+SELECT 
+  strftime('%Y-%W', 
+    substr(날짜,1,4) || '-' || substr(날짜,5,2) || '-' || substr(날짜,7,2)
+  ) AS 주차,
+  SUM(전체관객수) AS 총관객수
+FROM daily_stats
+GROUP BY 주차
 ORDER BY 주차
 """
 df1 = run_query(sql1)
