@@ -99,8 +99,8 @@ df3 = run_query(sql3)
 col5, col6 = st.columns([2, 1])
 with col5:
     fig3 = go.Figure(data=[
-        go.Bar(name='한국 영화 관객', x=df3['정책여부'], y=df3['한국인평균'], marker_color='#1f77b4'),
-        go.Bar(name='외국 영화 관객', x=df3['정책여부'], y=df3['외국인평균'], marker_color='#ff7f0e')
+        go.Bar(name='한국 영화 관객', x=df3['정책여부'], y=df3['한국영화'], marker_color='#1f77b4'),
+        go.Bar(name='외국 영화 관객', x=df3['정책여부'], y=df3['외국영화'], marker_color='#ff7f0e')
     ])
     fig3.update_layout(barmode='group', title='정책별 한국/외국 관객 평균 비교')
     st.plotly_chart(fig3, use_container_width=True)
