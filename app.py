@@ -79,20 +79,24 @@ df2 = df2.sort_values('정책여부')
 
 col3, col4 = st.columns([2, 1])
 with col3:
-    fig2 = px.bar(df2, x='정책여부', y='평균관객수', color='정책여부',
-                 color_discrete_map={'정책전': '#AB63FA', '정책후': '#FFA15A'},
-                 title='정책 시행 전/후 평균 관객수 비교')
-    st.plotly_chart(fig2, use_container_width=True)
-    fig2.update_layout(
-    yaxis_title="평균 관객수 (명)"
-)
-    fig2.update_yaxes(tickformat=",")
     fig2 = px.bar(
     df2, 
     x='정책여부', 
-    y='평균', 
-    text='평균'
+    y='평균관객수',
+    color='정책여부',
+    color_discrete_map={'정책전': '#AB63FA', '정책후': '#FFA15A'},
+    title='정책 시행 전/후 평균 관객수 비교',
+    text='평균관객수'
 )
+
+fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
+
+fig2.update_layout(
+    yaxis_title="평균 관객수 (명)"
+)
+
+fig2.update_yaxes(tickformat=",")
+
 
 fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
 
