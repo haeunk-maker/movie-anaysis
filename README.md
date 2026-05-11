@@ -2,13 +2,19 @@
 
 2025년 진행된 국민 영화관람 활성화 지원사업(영화 할인권 정책)의 효과를 데이터 기반으로 분석했다. 
 
+
 1. 사용한 프롬프트
 (1) Google AI Studio 링크 https://aistudio.google.com/app/prompts?state=%7B%22ids%22:%5B%221pxkvj734pTdK-6I-54PSZKl2kiiXixxk%22%5D,%22action%22:%22open%22,%22userId%22:%22109126207819715776794%22,%22resourceKeys%22:%7B%7D%7D&usp=sharing
 
-2. 데이터 및 클렌징 과정
+
+3. 데이터 및 클렌징 과정
+
 (1) 데이터 출처: 영화관입장권통합전산망(KOBIS)
+
 (2) 기간: 2025년 6월~10월
+
 (3) 수집 데이터: 일별 관객수, 매출액, 상영편수
+
 (4) 전처리 과정
 - 월별/일별 데이터 Excel 다운로드 후 CSV 변환
 - SQLite 데이터베이스(movie.db)에 저장
@@ -26,11 +32,12 @@
 - 정책 시행 이후 일평균 관객 수 약 17% 증가
 - 할인 정책이 실제 관람 수요 증가에 기여했음을 시사
 
-**(3) 한국, 외국 영화 관객 변화 비교 **
+**(3) 한국, 외국 영화 관객 변화 비교**
 - 한국 영화 관객 수 증가폭이 외국 영화보다 크게 나타남
 - 정책 효과가 국내 영화 수요 확대에 더 크게 작용한 것으로 해석됨 
 
 
 4. 대시보드 링크
+
 (1) Streamlit: https://movie-anaysis-2026.streamlit.app/
 (2) GitHub: https://github.com/haeunk-maker/movie-anaysis
