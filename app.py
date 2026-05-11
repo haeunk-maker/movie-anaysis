@@ -55,11 +55,11 @@ with col1:
 with col2:
     st.subheader("🔍 분석 정보")
     st.code(sql1, language='sql')
-    st.info("💡 **인사이트**\n- 할인권 배포 주차인 7월 5주에 주간 관갹 수가 급증했습니다. \n- 주간 데이터의 등락이 반복되는 것은 할인권 배포 이전에도 나타나 외부 요인이 크다는 것을 시사합니다.")
+    st.info("💡 **인사이트**\n- 할인권 배포 주차인 7월 5주에 주간 관객 수가 급증했습니다. \n- 주간 데이터의 등락이 반복되는 것은 할인권 배포 이전에도 나타나 외부 요인이 크다는 것을 시사합니다.")
 
 
 # --- 차트 2: 정책 전 vs 후 평균 관객수 ---
-st.header("2. 정책 시행 전/후 평균 관객수 비교")
+st.header("2. 정책 시행 전/후 일평균 관객수 비교")
 sql2 = """
 SELECT 
   CASE 
@@ -83,11 +83,25 @@ with col3:
                  color_discrete_map={'정책전': '#AB63FA', '정책후': '#FFA15A'},
                  title='정책 시행 전/후 평균 관객수 비교')
     st.plotly_chart(fig2, use_container_width=True)
+    fig2.update_layout(
+    yaxis_title="평균 관객수 (명)"
+)
+    fig2.update_yaxes(tickformat=",")
+    fig2 = px.bar(
+    df2, 
+    x='정책여부', 
+    y='평균', 
+    text='평균'
+)
+
+fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
+
+
 
 with col4:
     st.subheader("🔍 분석 정보")
     st.code(sql2, language='sql')
-    st.info("💡 **인사이트**\n- 정책 시행 이후 평균 관객수의 증감 여부를 수치로 증명합니다.\n- 막대의 높이 차이를 통해 정책의 직관적인 효과를 판단할 수 있습니다.")
+    st.info("💡 **인사이트**\n- 정책 시행 이후 일평균 관객 수는 .\n- 막대의 높이 차이를 통해 정책의 직관적인 효과를 판단할 수 있습니다.")
 
 
 # --- 차트 3: 한국 vs 외국 관객수 비교 ---
