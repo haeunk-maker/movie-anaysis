@@ -6,7 +6,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 
 # 1. 페이지 설정 및 한글 폰트 관련 안내
-st.set_page_config(page_title="영화 데이터 분석 대시보드", layout="wide")
+st.set_page_config(page_title="국민 영화관람 활성화 지원사업 데이터 시각화", layout="wide")
 
 # 2. 데이터베이스 연결 확인
 db_file = 'movie.db'
@@ -21,8 +21,8 @@ def run_query(query):
         return pd.read_sql(query, conn)
 
 # 헤더 부분
-st.title("🎬 영화 공공데이터 분석 대시보드")
-st.markdown("공공데이터를 활용하여 정책 전후의 관객 변화를 시각화합니다.")
+st.title("🎬 국민 영화관람 활성화 지원사업 데이터 시각화")
+st.markdown("2025년 7월 25일부터 총 450만 장 배포되었던 영화 6천원 할인권의 효과를 시각화했습니다.")
 st.divider()
 
 # --- 차트 1: 주별 관객수 변화 ---
@@ -55,7 +55,7 @@ with col1:
 with col2:
     st.subheader("🔍 분석 정보")
     st.code(sql1, language='sql')
-    st.info("💡 **인사이트**\n- 특정 주차에 관객수가 급증하는 패턴을 통해 계절성이나 대작 개봉 시기를 파악할 수 있습니다.\n- 전체적인 관객 흐름의 우상향/우하향 여부를 한눈에 보여줍니다.")
+    st.info("💡 **인사이트**\n- 할인권 배포 주차인 7월 5주에 주간 관갹 수가 급증했습니다. \n- 주간 데이터의 등락이 반복되는 것은 할인권 배포 이전에도 나타나 외부 요인이 크다는 것을 시사합니다.")
 
 
 # --- 차트 2: 정책 전 vs 후 평균 관객수 ---
