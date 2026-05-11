@@ -42,7 +42,7 @@ df1['라벨'] = df1['월'].astype(int).astype(str) + '월 ' + df1['주차'].asty
 
 col1, col2 = st.columns([2, 1])
 with col1:
-    fig1 = px.line(df1, x='주차', y='총관객수', title='주간 총 관객수 변화', markers=True)
+    fig1 = px.line(df1, x='라벨', y='총관객수', title='주간 총 관객수 변화', markers=True)
     st.plotly_chart(fig1, use_container_width=True)
 
 with col2:
