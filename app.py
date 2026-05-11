@@ -89,15 +89,15 @@ with col3:
     text='평균관객수'
 )
 
-fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
+    fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
 
-fig2.update_layout(
+    fig2.update_layout(
     yaxis_title="평균 관객수 (명)"
-)
+    )
 
-fig2.update_yaxes(tickformat=",")
+    fig2.update_yaxes(tickformat=",")
 
-st.plotly_chart(fig2, use_container_width=True)
+    st.plotly_chart(fig2, use_container_width=True)
 
 
 with col4:
