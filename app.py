@@ -58,7 +58,8 @@ SELECT
     WHEN 날짜 >= '20250725' THEN '정책후'
     ELSE '정책전'
   END AS 정책여부,
-  AVG(전체관객수) as 평균관객수 
+  AVG(전체관객수) as 평균,
+  COUNT(*) AS 일수 
 FROM daily_stats 
 GROUP BY 정책여부
 """
