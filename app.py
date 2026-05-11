@@ -22,7 +22,7 @@ def run_query(query):
 
 # 헤더 부분
 st.title("🎬 국민 영화관람 활성화 지원사업 데이터 시각화")
-st.markdown("2025년 7월 25일부터 총 450만 장 배포되었던 영화 6천원 할인권의 효과를 시각화했습니다.")
+st.markdown("2025년 문화체육관광부와 영화진흥위원회가 진행한 국민 영화관람 활성화 지원사업은 영화 6천원 할인권 450만 장을 2025년 7월 25일부터 배포했습니다. 2026년 사업을 앞두고 정책 효과를 시각화했습니다.")
 st.divider()
 
 # --- 차트 1: 주별 관객수 변화 ---
@@ -147,14 +147,14 @@ with col5:
 
     fig3.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
     fig3.update_yaxes(tickformat=",")
-    fig3.update_layout(yaxis_title="관객 수 변화량 (명)")
+    fig3.update_layout(yaxis_title="관객 수 변화량 (천 명)")
 
     st.plotly_chart(fig3, use_container_width=True)
 
 with col6:
     st.subheader("🔍 분석 정보")
     st.code(sql3, language='sql')
-    st.info("💡 **인사이트**\n- 정책 시행 이후 한국 영화 관객 수 증가폭이 외국 영화보다 크게 나타났다.\n- 이는 할인 정책이 국내 영화 수요 확대에 더 큰 영향을 미쳤음을 시사한다.")
+    st.info("💡 **인사이트**\n- 정책 시행 이후 한국 영화 관객 수는 증가했고, 외국 영화 관객 수는 감소했습니다.\n- 이는 할인권이 국내 영화 수요 확대에 더 큰 영향을 미쳤음을 시사합니다.")
 
 
 st.sidebar.success("데이터 분석 완료!")
