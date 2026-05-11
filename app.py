@@ -97,9 +97,7 @@ fig2.update_layout(
 
 fig2.update_yaxes(tickformat=",")
 
-
-fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
-
+st.plotly_chart(fig2, use_container_width=True)
 
 
 with col4:
