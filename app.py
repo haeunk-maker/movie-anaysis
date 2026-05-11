@@ -29,15 +29,16 @@ st.divider()
 st.header("1. 주별 관객수 변화 추이")
 sql1 = """
 SELECT 
-  strftime('%Y-%W', 
-    substr(날짜,1,4) || '-' || substr(날짜,5,2) || '-' || substr(날짜,7,2)
-  ) AS 주차,
+  substr(날짜,5,2) AS 월,
+  ((CAST(substr(날짜,7,2) AS INTEGER)-1)/7 + 1) AS 주차,
   SUM(전체관객수) AS 총관객수
 FROM daily_stats
-GROUP BY 주차
-ORDER BY 주차
+GROUP BY 월, 주차
+ORDER BY 월, 주차
 """
 df1 = run_query(sql1)
+
+df1['라벨'] = df1['월'].astype(int).astype(str) + '월 ' + df1['주차'].astype(int).astype(str) + '주차'
 
 col1, col2 = st.columns([2, 1])
 with col1:
