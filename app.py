@@ -42,7 +42,7 @@ df1['라벨'] = df1['월'].astype(int).astype(str) + '월 ' + df1['주차'].asty
 
 col1, col2 = st.columns([2, 1])
 with col1:
-    fig1 = px.line(df1, x='라벨', y='총관객수', title='주간 총 관객수 변화', markers=True)
+    fig1 = px.line(df1, x='라벨', y='총관객수', markers=True)
     
     fig1.add_vline(
     x="7월 5주차",  # 실제 데이터 기준 맞춰야 함
@@ -85,14 +85,13 @@ with col3:
     y='평균관객수',
     color='정책여부',
     color_discrete_map={'정책전': '#AB63FA', '정책후': '#FFA15A'},
-    title='정책 시행 전/후 평균 관객수 비교',
     text='평균관객수'
 )
 
     fig2.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
 
     fig2.update_layout(
-    yaxis_title="평균 관객수 (명)"
+    yaxis_title="평균 관객수 (천 명)"
     )
 
     fig2.update_yaxes(tickformat=",")
