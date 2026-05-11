@@ -102,11 +102,12 @@ with col3:
 with col4:
     st.subheader("🔍 분석 정보")
     st.code(sql2, language='sql')
-    st.info("💡 **인사이트**\n- 정책 시행 이후 일평균 관객 수는 .\n- 막대의 높이 차이를 통해 정책의 직관적인 효과를 판단할 수 있습니다.")
+    st.info("💡 **인사이트**\n- 정책 시행 이후 일평균 관객 수는 약 5만 5천 명 증가했습니다.\n- 이는 조사 기간 일평균 관객수의 약 17% 상승입니다.")
 
 
-# --- 차트 3: 한국 vs 외국 관객수 비교 ---
-st.header("3. 한국 vs 외국 관객수 비교 (정책 기준)")
+# --- 차트 3: 한국 vs 외국 관객수 변화량 ---
+st.header("3. 정책 영향 비교 (한국 vs 외국 영화)")
+
 sql3 = """
 SELECT 
   CASE 
@@ -120,18 +121,40 @@ GROUP BY 정책여부
 """
 df3 = run_query(sql3)
 
+# ✅ 변화량 계산
+before = df3[df3['정책여부'] == '정책전']
+after = df3[df3['정책여부'] == '정책후']
+
+한국변화 = after['한국영화'].values[0] - before['한국영화'].values[0]
+외국변화 = after['외국영화'].values[0] - before['외국영화'].values[0]
+
+df_change = pd.DataFrame({
+    '구분': ['한국 영화', '외국 영화'],
+    '변화량': [한국변화, 외국변화]
+})
+
 col5, col6 = st.columns([2, 1])
+
 with col5:
-    fig3 = go.Figure(data=[
-        go.Bar(name='한국 영화 관객', x=df3['정책여부'], y=df3['한국영화'], marker_color='#1f77b4'),
-        go.Bar(name='외국 영화 관객', x=df3['정책여부'], y=df3['외국영화'], marker_color='#ff7f0e')
-    ])
-    fig3.update_layout(barmode='group', title='정책별 한국/외국 관객 평균 비교')
+    fig3 = px.bar(
+        df_change,
+        x='구분',
+        y='변화량',
+        color='구분',
+        text='변화량',
+        title='정책 전후 관객 수 변화량 비교'
+    )
+
+    fig3.update_traces(texttemplate='%{text:,.0f}', textposition='outside')
+    fig3.update_yaxes(tickformat=",")
+    fig3.update_layout(yaxis_title="관객 수 변화량 (명)")
+
     st.plotly_chart(fig3, use_container_width=True)
 
 with col6:
     st.subheader("🔍 분석 정보")
     st.code(sql3, language='sql')
-    st.info("💡 **인사이트**\n- 정책이 한국 영화와 외국 영화 중 어느 쪽에 더 큰 영향을 주었는지 비교 분석이 가능합니다.\n- 두 집단 간의 격차가 정책 후 좁혀졌는지 혹은 벌어졌는지 확인하세요.")
+    st.info("💡 **인사이트**\n- 정책 시행 이후 한국 영화 관객 수 증가폭이 외국 영화보다 크게 나타났다.\n- 이는 할인 정책이 국내 영화 수요 확대에 더 큰 영향을 미쳤음을 시사한다.")
+
 
 st.sidebar.success("데이터 분석 완료!")
