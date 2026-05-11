@@ -55,7 +55,7 @@ st.header("2. 정책 시행 전/후 평균 관객수 비교")
 sql2 = """
 SELECT 
   CASE 
-    WHEN 날짜 >= '2025-07-25' THEN '정책후'
+    WHEN 날짜 >= '20250725' THEN '정책후'
     ELSE '정책전'
   END AS 정책여부,
   AVG(전체관객수) as 평균관객수 
@@ -86,11 +86,11 @@ st.header("3. 한국 vs 외국 관객수 비교 (정책 기준)")
 sql3 = """
 SELECT 
   CASE 
-    WHEN 날짜 >= '2025-07-25' THEN '정책후'
+    WHEN 날짜 >= '20250725' THEN '정책후'
     ELSE '정책전'
   END AS 정책여부,
-  AVG(한국관객수) as 한국인평균, 
-  AVG(외국관객수) as 외국인평균 
+  AVG(한국관객수) as 한국영화,
+  AVG(외국관객수) as 외국영화
 FROM daily_stats 
 GROUP BY 정책여부
 """
@@ -99,8 +99,8 @@ df3 = run_query(sql3)
 col5, col6 = st.columns([2, 1])
 with col5:
     fig3 = go.Figure(data=[
-        go.Bar(name='한국 관객', x=df3['정책여부'], y=df3['한국인평균'], marker_color='#1f77b4'),
-        go.Bar(name='외국 관객', x=df3['정책여부'], y=df3['외국인평균'], marker_color='#ff7f0e')
+        go.Bar(name='한국 영화 관객', x=df3['정책여부'], y=df3['한국인평균'], marker_color='#1f77b4'),
+        go.Bar(name='외국 영화 관객', x=df3['정책여부'], y=df3['외국인평균'], marker_color='#ff7f0e')
     ])
     fig3.update_layout(barmode='group', title='정책별 한국/외국 관객 평균 비교')
     st.plotly_chart(fig3, use_container_width=True)
